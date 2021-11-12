@@ -2,7 +2,7 @@ import csv
 import numpy as np
 
 def main():
-  with open('simplex.csv', mode='r') as csv_file:
+  with open('sample.csv', mode='r') as csv_file:
     csv_data = csv.reader(csv_file)
     rows = []
     for row in csv_data:
@@ -20,6 +20,15 @@ def main():
         pretty_print(rows)
         rows, do_iter = simplex_iter(rows)
         print('\n')
+      with open('result.csv', 'w') as output:
+        output.write(make_csv(rows))
+
+######### MAKE CSV #################
+def make_csv(data: list[list]) -> str:
+  result = ' '
+  for i in data:
+    result += ','.join(i) + "\n"
+  return result
 
 
 ######### VALIDATION ###############
