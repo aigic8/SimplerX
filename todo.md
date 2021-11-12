@@ -4,4 +4,4 @@
 - find active row and column DONE
 - do row column transformation DONE
 - add csv output DONE
-- make input & output dynamic with flags
+- make input & output dynamic with flags DONE

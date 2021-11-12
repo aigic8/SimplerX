@@ -1,8 +1,15 @@
 import csv
+import os
 import numpy as np
+import argparse
 
 def main():
-  with open('sample.csv', mode='r') as csv_file:
+  parser = argparse.ArgumentParser()
+  parser.add_argument('input', help='Source file to read data from.', type=str)
+  parser.add_argument('-o', '--output', help='Sets output file path. If not sepecified, no output will be created.', type=str)
+  args = parser.parse_args()
+
+  with open(os.path.join(os.getcwd(), args.input), mode='r') as csv_file:
     csv_data = csv.reader(csv_file)
     rows = []
     for row in csv_data:
@@ -20,8 +27,9 @@ def main():
         pretty_print(rows)
         rows, do_iter = simplex_iter(rows)
         print('\n')
-      with open('result.csv', 'w') as output:
-        output.write(make_csv(rows))
+      if args.output != None:
+        with open(os.path.join(os.getcwd(), args.output), 'w') as output:
+          output.write(make_csv(rows))
 
 ######### MAKE CSV #################
 def make_csv(data: list[list]) -> str:
